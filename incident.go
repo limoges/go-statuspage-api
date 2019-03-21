@@ -155,16 +155,12 @@ func (c *Client) GetScheduledIncidents() ([]Incident, error) {
 	return c.doGetIncidents("incidents/scheduled.json")
 }
 
-func (c *Client) CreateIncident(component, name, message, status string) (*Incident, error) {
+func (c *Client) CreateIncident(component, name, message, status string, componentIDs []string) (*Incident, error) {
 	switch status {
 	case "investigating", "identified", "monitoring", "resolved":
 		break
 	default:
 		return nil, fmt.Errorf("create error: status not (investigating|identified|monitoring|resolved), got %s", status)
-	}
-	cp, err := c.GetComponentByName(component)
-	if err != nil {
-		return nil, err
 	}
 	i := &NewIncident{
 		Name:               name,
@@ -172,7 +168,7 @@ func (c *Client) CreateIncident(component, name, message, status string) (*Incid
 		Message:            message,
 		WantsTwitterUpdate: false,
 		ImpactOverride:     "none",
-		ComponentIDs:       []string{*cp.ID},
+		ComponentIDs:       componentIDs,
 	}
 	resp := &Incident{}
 	err = c.doPost("incidents.json", i, resp)

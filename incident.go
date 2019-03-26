@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// @TODO: new struct for affected_components
+/*
+{
+	"code": "zjyhtpyy3wgl",
+	"name": "API (example)",
+	"old_status": "major_outage",
+	"new_status": "major_outage"
+},
+*/
+
+// @TODO: struct is out of date with API specification
+// lacks `json:"incident_updates,omitempty"`
 type IncidentUpdate struct {
 	Body               *string    `json:"body,omitempty"`
 	CreatedAt          *time.Time `json:"created_at,omitempty"`

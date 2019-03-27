@@ -182,7 +182,7 @@ func (c *Client) CreateIncident(component, name, message, status string, compone
 		ComponentIDs:       componentIDs,
 	}
 	resp := &Incident{}
-	err = c.doPost("incidents.json", i, resp)
+	err := c.doPost("incidents.json", i, resp)
 	if err != nil {
 		return nil, err
 	}

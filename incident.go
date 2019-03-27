@@ -5,28 +5,27 @@ import (
 	"time"
 )
 
-// @TODO: new struct for affected_components
-/*
-{
-	"code": "zjyhtpyy3wgl",
-	"name": "API (example)",
-	"old_status": "major_outage",
-	"new_status": "major_outage"
-},
-*/
+type IncidentAffectedComponent struct {
+	Code      *string `json:"code,omitempty"`
+	Name      *string `json:"name,omitempty"`
+	OldStatus *string `json:"old_status,omitempty"`
+	NewStatus *string `json:"new_status,omitempty"`
+}
 
-// @TODO: struct is out of date with API specification
-// lacks `json:"incident_updates,omitempty"`
 type IncidentUpdate struct {
-	Body               *string    `json:"body,omitempty"`
-	CreatedAt          *time.Time `json:"created_at,omitempty"`
-	DisplayAt          *time.Time `json:"display_at,omitempty"`
-	ID                 *string    `json:"id,omitempty"`
-	IncidentID         *string    `json:"incident_id,omitempty"`
-	Status             *string    `json:"status,omitempty"`
-	TwitterUpdatedAt   *time.Time `json:"twitter_updated_at,omitempty"`
-	UpdatedAt          *time.Time `json:"updated_at,omitempty"`
-	WantsTwitterUpdate *bool      `json:"wants_twitter-update,omitempty"`
+	AffectedComponents   *[]IncidentAffectedComponent `json:"affected_components,omitempty"`
+	Body                 *string                      `json:"body,omitempty"`
+	CreatedAt            *time.Time                   `json:"created_at,omitempty"`
+	CustomTweet          *string                      `json:"custom_tweet,omitempty"`
+	DeliverNotifications *bool                        `json:"deliver_notifications,omitempty"`
+	DisplayAt            *time.Time                   `json:"display_at,omitempty"`
+	ID                   *string                      `json:"id,omitempty"`
+	IncidentID           *string                      `json:"incident_id,omitempty"`
+	Status               *string                      `json:"status,omitempty"`
+	TweetID              *string                      `json:"tweet_id,omitempty"`
+	TwitterUpdatedAt     *time.Time                   `json:"twitter_updated_at,omitempty"`
+	UpdatedAt            *time.Time                   `json:"updated_at,omitempty"`
+	WantsTwitterUpdate   *bool                        `json:"wants_twitter-update,omitempty"`
 }
 
 type Incident struct {

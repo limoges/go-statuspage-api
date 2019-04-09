@@ -92,7 +92,7 @@ func (c *Client) GetComponentByName(name string) (*Component, error) {
 }
 
 func (c *Client) GetComponentGroups() ([]ComponentGroup, error) {
-	resp := []ComponentGroup{}
+	var resp []ComponentGroup
 	err := c.doGet("component-groups.json", nil, &resp)
 	if err != nil {
 		return nil, err

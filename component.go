@@ -19,13 +19,13 @@ type Component struct {
 }
 
 type ComponentGroup struct {
-	Components  *[]Component `json:"components,omitempty"`
-	CreatedAt   *time.Time   `json:"created_at,omitempty"`
-	ID          *string      `json:"id,omitempty"`
-	Name        *string      `json:"name,omitempty"`
-	PageID      *string      `json:"page_id,omitempty"`
-	Position    *int         `json:"position,omitempty"`
-	UpdatedAt   *time.Time   `json:"updated_at,omitempty"`
+	Components  *[]string  `json:"components,omitempty"`
+	CreatedAt   *time.Time `json:"created_at,omitempty"`
+	ID          *string    `json:"id,omitempty"`
+	Name        *string    `json:"name,omitempty"`
+	PageID      *string    `json:"page_id,omitempty"`
+	Position    *int       `json:"position,omitempty"`
+	UpdatedAt   *time.Time `json:"updated_at,omitempty"`
 }
 
 func (c *Component) String() string {
@@ -92,7 +92,7 @@ func (c *Client) GetComponentByName(name string) (*Component, error) {
 }
 
 func (c *Client) GetComponentGroups() ([]ComponentGroup, error) {
-	var resp []ComponentGroup
+	resp := []ComponentGroup{}
 	err := c.doGet("component-groups.json", nil, &resp)
 	if err != nil {
 		return nil, err

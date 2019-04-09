@@ -18,6 +18,16 @@ type Component struct {
 	GroupID     *string    `json:"group_id,omitempty"`
 }
 
+type ComponentGroup struct {
+	Components  *[]Component `json:"components,omitempty"`
+	CreatedAt   *time.Time   `json:"created_at,omitempty"`
+	ID          *string      `json:"id,omitempty"`
+	Name        *string      `json:"name,omitempty"`
+	PageID      *string      `json:"page_id,omitempty"`
+	Position    *int         `json:"position,omitempty"`
+	UpdatedAt   *time.Time   `json:"updated_at,omitempty"`
+}
+
 func (c *Component) String() string {
 	var out string
 	line := "-----------------"
@@ -79,6 +89,15 @@ func (c *Client) GetComponentByName(name string) (*Component, error) {
 		}
 	}
 	return nil, fmt.Errorf("search error: Component with name %s not found", name)
+}
+
+func (c *Client) GetComponentGroups() ([]ComponentGroup, error) {
+	resp := []ComponentGroup{}
+	err := c.doGet("component-groups.json", nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
 }
 
 func (c *Client) doUpdateComponent(comp *Component, params fmt.Stringer) (*Component, error) {

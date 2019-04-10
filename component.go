@@ -9,13 +9,14 @@ import (
 type Component struct {
 	CreatedAt   *time.Time `json:"created_at,omitempty"`
 	Description *string    `json:"description,omitempty"`
+	Group       bool       `json:"group,omitempty"`
+	GroupID     *string    `json:"group_id,omitempty"`
 	ID          *string    `json:"id,omitempty"`
 	Name        *string    `json:"name,omitempty"`
 	PageID      *string    `json:"page_id,omitempty"`
 	Position    *int       `json:"position,omitempty"`
 	Status      *string    `json:"status,omitempty"`
 	UpdatedAt   *time.Time `json:"updated_at,omitempty"`
-	GroupID     *string    `json:"group_id,omitempty"`
 }
 
 type ComponentGroup struct {

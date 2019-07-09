@@ -154,6 +154,16 @@ func (c *Client) doGetIncidents(path string) ([]Incident, error) {
 	return resp, nil
 }
 
+func (c *Client) GetIncident(incidentID string) (*Incident, error) {
+	path := "incidents/" + incidentID + ".json"
+	resp := &Incident{}
+	err := c.doGet(path, nil, resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *Client) GetAllIncidents() ([]Incident, error) {
 	return c.doGetIncidents("incidents.json")
 }

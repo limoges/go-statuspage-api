@@ -243,8 +243,8 @@ func (c *Client) CreateHistoricIncident(name, message string, date time.Time) (*
 // UpdateIncident updates an incident. If Status and/or Message are different,
 // a new update will be published for the incident. Each change will add an
 // update notification, so updates should be batched.
-func (c *Client) UpdateIncident(incident *Incident, name, status, message string) (*Incident, error) {
-	path := "incidents/" + *incident.ID + ".json"
+func (c *Client) UpdateIncident(incidentID string, name, status, message string) (*Incident, error) {
+	path := "incidents/" + *incidentID + ".json"
 	u := &NewIncidentUpdate{
 		Name:    name,
 		Status:  status,
@@ -258,8 +258,8 @@ func (c *Client) UpdateIncident(incident *Incident, name, status, message string
 	return resp, nil
 }
 
-func (c *Client) DeleteIncident(incident *Incident) (*Incident, error) {
-	path := "incidents/" + *incident.ID + ".json"
+func (c *Client) DeleteIncident(incidentID string) (*Incident, error) {
+	path := "incidents/" + *incidentID + ".json"
 	resp := &Incident{}
 	err := c.doDelete(path, nil, resp)
 	if err != nil {

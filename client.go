@@ -12,7 +12,7 @@ const DefaultAPIURL = "https://api.statuspage.io/v1/pages/"
 type Client struct {
 	apiKey     string
 	pageID     string
-	httpClient *http.Client
+	httpClient HTTPClient
 	url        *url.URL
 }
 
@@ -28,4 +28,13 @@ func NewClient(apiKey, pageID string) (*Client, error) {
 		url:        u,
 	}
 	return &c, nil
+}
+
+type HTTPClient interface {
+	Do(*http.Request) (*http.Response, error)
+}
+
+func WithHTTPClient(client *Client, c HTTPClient) error {
+	client.httpClient = c
+	return nil
 }
